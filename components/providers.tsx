@@ -8,16 +8,21 @@ import { SolanaClientProvider } from "@/lib/solana/client-context";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { transition } from "@/lib/motion";
+import { RoleProvider } from "@/lib/role";
 
 export function Providers({ children }: PropsWithChildren) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () => new QueryClient({ defaultOptions: { queries: { staleTime: 5_000, refetchOnWindowFocus: false } } })
+  );
 
   return (
     <MotionConfig reducedMotion="user" transition={transition.base}>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider delayDuration={200}>
           <SolanaClientProvider>
-            <WalletProvider>{children}</WalletProvider>
+            <WalletProvider>
+              <RoleProvider>{children}</RoleProvider>
+            </WalletProvider>
           </SolanaClientProvider>
         </TooltipProvider>
         <Toaster />

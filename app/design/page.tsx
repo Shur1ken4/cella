@@ -44,7 +44,7 @@ const nav = [
 export default function DesignPage() {
   return (
     <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[200px_1fr] lg:gap-14 lg:py-16">
-      <aside className="lg:sticky lg:top-10 lg:self-start">
+      <aside className="lg:sticky lg:top-24 lg:self-start">
         <Link
           href="/"
           className="type-caption inline-flex items-center gap-1 text-text-muted hover:text-text focus-ring"
@@ -68,7 +68,7 @@ export default function DesignPage() {
         </nav>
       </aside>
 
-      <main className="flex min-w-0 flex-col gap-14">
+      <div className="flex min-w-0 flex-col gap-14">
         <header className="max-w-2xl">
           <h1 className="type-h1 sm:type-display text-text">{copy.design.title}</h1>
           <p className="type-body mt-3 text-text-muted">{copy.design.intro}</p>
@@ -115,7 +115,7 @@ export default function DesignPage() {
         <Section id="primitives" title={s.primitives}>
           <PrimitivesDemo />
         </Section>
-      </main>
+      </div>
     </div>
   );
 }

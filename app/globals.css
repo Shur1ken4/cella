@@ -187,6 +187,13 @@
   }
 }
 
+/* Money-flow lines in the rights map */
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
 /* ---- Typography utilities (CLAUDE.md scale) ---- */
 @utility type-display {
   font-family: var(--font-heading);

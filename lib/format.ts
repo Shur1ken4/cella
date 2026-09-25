@@ -18,3 +18,16 @@ export function formatCompact(n: number): string {
 export function formatPercent(fraction: number, digits = 0): string {
   return `${(fraction * 100).toFixed(digits)}%`;
 }
+
+const dateFormat = new Intl.DateTimeFormat("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+/** "2026-03-02T10:00:00Z" → "02 Mar 2026" */
+export function formatDate(iso: string): string {
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? iso : dateFormat.format(d);
+}

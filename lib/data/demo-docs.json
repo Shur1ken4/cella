@@ -1,0 +1,20 @@
+[
+  {
+    "file": "patent-filing-bap-001.pdf",
+    "label": "Patent filing",
+    "path": "/demo-docs/patent-filing-bap-001.pdf",
+    "sha256": "4ee061753685337755307303678b8d9901ca33a4eeb477f6a0fe3602026f96ac"
+  },
+  {
+    "file": "licence-agreement-bap-001.pdf",
+    "label": "Exclusive licence agreement",
+    "path": "/demo-docs/licence-agreement-bap-001.pdf",
+    "sha256": "23b556b26cef25a28178805df9f65ecadfb792b1fbb46dabf546a7f12898286d"
+  },
+  {
+    "file": "preclinical-report-bap-001.pdf",
+    "label": "Preclinical study report",
+    "path": "/demo-docs/preclinical-report-bap-001.pdf",
+    "sha256": "339950bf7d68da0ba88dd3e7ce1576de63f2e7f15fc6a8cc1ab3f72688176b86"
+  }
+]

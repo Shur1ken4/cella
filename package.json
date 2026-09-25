@@ -8,13 +8,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
-    "test": "echo \"No tests yet (added from Phase 2 onwards)\"",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
     "check": "npm run lint && npm run typecheck && npm run test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "anchor-build": "cd anchor && anchor build",
-    "anchor-test": "cd anchor && anchor test"
+    "anchor-test": "cd anchor && anchor test",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@solana/kit": "^6.3.0",
@@ -43,7 +44,7 @@
     "@codama/nodes-from-anchor": "1.5.3",
     "@codama/renderers-js": "1.7.1",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24.13.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "codama": "1.10.0",
@@ -51,6 +52,7 @@
     "eslint-config-next": "16.0.10",
     "prettier": "^3.6.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^5.0.2"
   }
 }
