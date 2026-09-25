@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { copy } from "@/lib/copy";
 import { WalletButton } from "@/components/wallet/wallet-button";
@@ -16,7 +17,10 @@ const links = [
 ];
 
 function isActive(pathname: string, href: string) {
-  if (href === "/app") return ["/app", "/asset", "/vault", "/sign"].some((p) => pathname.startsWith(p));
+  if (href === "/app")
+    return ["/app", "/asset", "/vault", "/sign"].some((p) =>
+      pathname.startsWith(p)
+    );
   return pathname.startsWith(href);
 }
 
@@ -39,12 +43,16 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border bg-bg-deep/85 backdrop-blur-md">
       <a
         href="#main"
-        className="sr-only z-50 rounded-md bg-green px-3 py-2 text-bg-deep focus:not-sr-only focus:absolute focus:top-2 focus:left-2"
+        className="sr-only z-50 rounded-md bg-green-fill px-3 py-2 text-on-green focus:not-sr-only focus:absolute focus:top-2 focus:left-2"
       >
         {copy.nav.skipToContent}
       </a>
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-4 sm:px-6">
-        <Link href="/" aria-label={copy.nav.home} className="shrink-0 rounded-md focus-ring">
+        <Link
+          href="/"
+          aria-label={copy.nav.home}
+          className="shrink-0 rounded-md focus-ring"
+        >
           <Logo className="max-sm:[&>span:last-child]:hidden" />
         </Link>
 
@@ -57,12 +65,18 @@ export function SiteHeader() {
                   aria-current={isActive(pathname, l.href) ? "page" : undefined}
                   className={cn(
                     "relative rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 ease-brand focus-ring",
-                    isActive(pathname, l.href) ? "text-text" : "text-text-muted hover:text-text"
+                    isActive(pathname, l.href)
+                      ? "text-text"
+                      : "text-text-muted hover:text-text"
                   )}
                 >
                   {l.label}
                   {isActive(pathname, l.href) && (
-                    <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-green" aria-hidden="true" />
+                    <motion.span
+                      layoutId="nav-underline"
+                      className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-green-fill"
+                      aria-hidden="true"
+                    />
                   )}
                 </Link>
               </li>
@@ -80,13 +94,21 @@ export function SiteHeader() {
             aria-label={open ? copy.nav.closeMenu : copy.nav.menu}
             className="grid size-10 place-items-center rounded-md border border-border-strong bg-surface-2 text-text md:hidden focus-ring"
           >
-            {open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
+            {open ? (
+              <X className="size-5" aria-hidden="true" />
+            ) : (
+              <Menu className="size-5" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Main" className="border-t border-border bg-bg-deep md:hidden">
+        <nav
+          id="mobile-nav"
+          aria-label="Main"
+          className="border-t border-border bg-bg-deep md:hidden"
+        >
           <ul className="mx-auto flex max-w-7xl flex-col px-4 py-2">
             {links.map((l) => (
               <li key={l.href}>
@@ -95,7 +117,9 @@ export function SiteHeader() {
                   aria-current={isActive(pathname, l.href) ? "page" : undefined}
                   className={cn(
                     "block rounded-md px-3 py-3 text-base font-medium focus-ring",
-                    isActive(pathname, l.href) ? "bg-surface-1 text-text" : "text-text-muted"
+                    isActive(pathname, l.href)
+                      ? "bg-surface-1 text-text"
+                      : "text-text-muted"
                   )}
                 >
                   {l.label}

@@ -119,7 +119,7 @@ export function WalletButton() {
         aria-haspopup="menu"
         className="flex h-10 cursor-pointer items-center gap-2 rounded-md border border-border-strong bg-surface-2 px-3 text-xs font-medium text-text transition-colors duration-150 ease-brand hover:bg-surface-3 focus-ring"
       >
-        <span className="h-2 w-2 rounded-full bg-green shadow-glow" aria-hidden="true" />
+        <span className="h-2 w-2 rounded-full bg-green-fill shadow-glow" aria-hidden="true" />
         <span className="nums text-cyan">{ellipsify(address, 4)}</span>
       </button>
 

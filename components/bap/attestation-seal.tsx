@@ -110,7 +110,7 @@ export function AttestationSeal({
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 500, damping: 18, delay: delay + 0.25 }}
           className={cn(
-            "absolute -right-0.5 -bottom-0.5 grid place-items-center rounded-full border-2 border-bg-deep bg-green text-bg-deep",
+            "absolute -right-0.5 -bottom-0.5 grid place-items-center rounded-full border-2 border-bg-deep bg-green-fill text-on-green",
             s.check
           )}
         >

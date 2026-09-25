@@ -2,6 +2,7 @@ import * as React from "react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AnimatedNumber } from "@/components/motion/animated-number";
 
 type StatTileProps = {
   label: string;
@@ -12,6 +13,8 @@ type StatTileProps = {
   /** green = verified/confirmed, cyan = data (default) */
   accent?: "cyan" | "green" | "none";
   loading?: boolean;
+  /** Numbers only: 490000 → "490K". */
+  compact?: boolean;
   className?: string;
 };
 
@@ -29,12 +32,13 @@ export function StatTile({
   hint,
   accent = "cyan",
   loading = false,
+  compact = false,
   className,
 }: StatTileProps) {
   return (
     <div
       className={cn(
-        "surface-card flex flex-col gap-3 rounded-lg border border-border p-4",
+        "surface-card flex flex-col gap-3 rounded-lg border border-border p-4 shadow-card",
         className
       )}
     >
@@ -57,7 +61,9 @@ export function StatTile({
         <Skeleton className="h-9 w-32" />
       ) : (
         <p className="flex min-w-0 flex-wrap items-baseline gap-x-1.5">
-          <span className="nums text-3xl font-medium break-all text-text">{value}</span>
+          <span className="nums text-3xl font-medium break-all text-text">
+            {typeof value === "number" ? <AnimatedNumber value={value} compact={compact} /> : value}
+          </span>
           {unit && (
             <span className="nums text-sm text-text-muted">{unit}</span>
           )}

@@ -5,6 +5,7 @@ import { copy } from "@/lib/copy";
 import { fontVariables } from "./fonts";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
+import { themeInitScript } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: copy.site.name,
@@ -22,7 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${fontVariables}`} suppressHydrationWarning>
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
+      <head>
+        {/* Apply the saved theme before first paint. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <Providers>
           <div className="flex min-h-dvh flex-col">

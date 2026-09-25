@@ -151,6 +151,8 @@ export const copy = {
     mockDataHint: "Phase 2 preview: actions are simulated in your browser.",
     resetDemo: "Reset demo",
     resetDone: "Demo data reset",
+    darkTheme: "Dark theme",
+    lightTheme: "Light theme",
   },
 
   roles: {
@@ -406,12 +408,184 @@ export const copy = {
 
   howItWorks: {
     title: "How it works",
-    comingSoon: "The explainer video arrives in the next build phase.",
+    intro: "Two short animated tracks: the idea in 50 seconds, and a walkthrough of the demo you can click through yourself.",
+    faqTitle: "Questions",
     cta: "Try the demo",
+    faq: [
+      {
+        q: "Why use a blockchain?",
+        a: "No single company owns a drug’s story, so none of them should control the official record. The same record also holds investors’ money and pays it out automatically when a milestone is confirmed.",
+      },
+      {
+        q: "Is this real money?",
+        a: "No. This demo runs on Solana devnet with tUSDC, a test token with no value. You can get 10,000 for free with one click.",
+      },
+      {
+        q: "Where are my documents stored?",
+        a: "Nowhere but your own device. Your browser computes a SHA-256 fingerprint and only that fingerprint goes onchain, so anyone can later check a file matches.",
+      },
+      {
+        q: "Who can sign?",
+        a: "Only approved institutions, and only the claims they own: the university signs patents and licences, the lab signs trial milestones, the pharma licensee signs its licence.",
+      },
+      {
+        q: "What happens if a claim is wrong?",
+        a: "The institution that signed it can revoke it. The correction is public and permanent, and the vault only releases money against claims that are still valid.",
+      },
+    ],
   },
 
   home: {
     cta: "Try the demo",
+    watch: "Watch how it works",
+    heroTitle: "Verified biotech assets, financeable on Solana.",
+    heroSub: "Verified. Funded. Paid.",
+    heroBody: "A digital passport for a drug candidate, signed by the institutions that hold rights in it, with a vault that pays investors when a milestone is confirmed.",
+    explainerTitle: "How it works in 50 seconds",
+    steps: {
+      title: "Three building blocks",
+      items: [
+        { title: "Passport", body: "One onchain record of the asset: rights holders, stage and document fingerprints." },
+        { title: "Attestations", body: "The university, lab and pharma each sign the facts they own. Nobody can fake or quietly change them." },
+        { title: "Vault", body: "Investors fund the asset in USDC. Signed milestones release money and pay investors automatically." },
+      ],
+    },
+    problem: {
+      title: "Why early drugs struggle to get funded",
+      stats: [
+        {
+          value: "7.9%",
+          label: "of drugs entering Phase I trials reach approval",
+          source: "BIO / Informa / QLS, 2011–2020",
+          href: "https://www.bio.org/clinical-development-success-rates-and-contributing-factors-2011-2020",
+        },
+        {
+          value: "$2.6B",
+          label: "average cost to bring one new drug to market",
+          source: "Tufts CSDD, DiMasi et al. 2016",
+          href: "https://www.globenewswire.com/news-release/2016/03/10/1187518/0/en/Tufts-Center-for-the-Study-of-Drug-Development-Assessment-of-Cost-to-Develop-and-Win-Marketing-Approval-for-a-New-Drug-Now-Published.html",
+        },
+        {
+          value: "10–15 yrs",
+          label: "from discovery to an approved medicine",
+          source: "PhRMA",
+          href: "https://phrma.org/policy-issues/research-development",
+        },
+      ],
+      sourceLabel: "Source",
+    },
+    whyChain: {
+      title: "Why blockchain?",
+      body: "No single company owns a drug’s story. The university, startup, investors and pharma all have rights in the same asset, so none of them should control the official record. The same record also holds investors’ money and pays it out automatically when a milestone is confirmed. A normal database would need one company in the middle holding everyone’s money and deciding what is true.",
+      rows: [
+        { title: "No single owner", body: "The record is shared, not held by one company." },
+        { title: "Signed by the right people", body: "Each fact is signed by the institution that owns it." },
+        { title: "Money moves automatically", body: "Code releases funds when a milestone is signed." },
+        { title: "Documents stay private", body: "Only fingerprints go onchain, never the files." },
+      ],
+    },
+    builtOn: {
+      title: "Built on Solana",
+      items: ["Solana", "Solana Attestation Service", "USDC (test token)", "Anchor"],
+    },
+    finalCta: {
+      title: "See it working in two minutes",
+      body: "Sign a milestone, fund the vault, claim your payout. All on devnet, with test money.",
+      button: "Try the demo on devnet",
+    },
+  },
+
+  explainer: {
+    label: "Explainer video",
+    tracks: { idea: "The idea", howTo: "How to use it" },
+    play: "Play",
+    pause: "Pause",
+    replay: "Replay",
+    prev: "Previous scene",
+    next: "Next scene",
+    goTo: (n: number) => `Go to scene ${n}`,
+    sceneOf: (n: number, total: number) => `Scene ${n} of ${total}`,
+    tryItNow: "Try it now",
+    reducedMotion: "Reduced motion is on: showing each scene's final frame. Use the arrows to step through.",
+    idea: [
+      {
+        title: "A new drug’s history is scattered",
+        caption: "Its patents, contracts, emails and trial results sit in different offices. Nobody has the full picture.",
+      },
+      {
+        title: "So investors can’t trust it",
+        caption: "Checking it all takes lawyers months. Too slow and expensive, so most early drugs never get funded.",
+      },
+      {
+        title: "One digital passport for the drug",
+        caption: "We gather the key facts into one record, like a car’s service history that follows it from owner to owner.",
+      },
+      {
+        title: "The right people confirm each fact",
+        caption:
+          "The university confirms the patent, the lab confirms the trial. Each uses a digital signature nobody can fake or quietly change.",
+      },
+      {
+        title: "Now investors can fund it",
+        caption: "Because the facts are trustworthy, investors put test USDC into a shared vault for this drug.",
+      },
+      {
+        title: "Milestone confirmed, everyone gets paid",
+        caption: "When the lab signs ‘Phase I complete’, the vault pays investors automatically. No middleman.",
+      },
+      {
+        title: "Verified. Funded. Paid.",
+        caption: "Trustworthy facts make a drug fundable, and code makes sure everyone gets paid. On Solana.",
+      },
+    ],
+    howTo: [
+      {
+        title: "Open the passport",
+        caption: "On the dashboard, click Cancer Drug X to open its passport: stage, signed events, documents and vault.",
+        href: "/asset/BAP-001",
+      },
+      {
+        title: "Sign as an institution",
+        caption: "In the signing console, act as the lab: pick ‘Phase I complete’ and click Sign. The seal stamps onto the passport.",
+        href: "/sign?asset=BAP-001&event=PHASE1_COMPLETE",
+      },
+      {
+        title: "Get test money and verify",
+        caption: "In the vault, click ‘Get 10,000 tUSDC’ for free test money, then ‘Get verified’ for demo KYC.",
+        href: "/vault/BAP-001",
+      },
+      {
+        title: "Deposit into the vault",
+        caption: "Type an amount and click Deposit. Your test USDC moves into the vault and your share appears.",
+        href: "/vault/BAP-001",
+      },
+      {
+        title: "Claim your payout",
+        caption: "Once ‘Phase I complete’ is signed and the payout unlocked, click Claim. Your share flows back to you.",
+        href: "/vault/BAP-001",
+      },
+    ],
+    labels: {
+      docs: ["Patents", "Licences", "Emails", "Funding", "Trials", "Contracts"],
+      investor: "Investor",
+      investors: "Investors",
+      drug: "Drug X",
+      vault: "Vault",
+      rows: ["Patent filed", "Phase I complete", "Licensed to pharma"],
+      trio: ["Verified", "Funded", "Paid"],
+      onSolana: "On Solana",
+      phase1: "Phase I complete",
+      balance: "Balance",
+      dashboard: "Dashboard",
+      signBtn: "Sign attestation",
+      faucetBtn: "Get 10,000 tUSDC",
+      kycBtn: "Get verified",
+      depositBtn: "Deposit",
+      claimBtn: "Claim payout",
+      claimed: "+3,000 tUSDC claimed",
+      paid: "+ paid",
+      ofTarget: "of 500,000 tUSDC",
+    },
   },
 
   design: {

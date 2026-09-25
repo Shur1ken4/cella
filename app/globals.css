@@ -5,15 +5,73 @@
 /* =============================================================================
    Biotech Asset Passport — design tokens (CLAUDE.md §4)
    This file is the ONLY place raw colour values may appear.
-   Dark navy is the only theme.
+   Default theme: LIGHT (white). The original dark navy theme is kept as an
+   alternate: <html data-theme="dark">. Token NAMES are identical in both.
    ========================================================================== */
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-:root {
-  color-scheme: dark;
+/* ---------- Light (default; a subtree can opt back in with data-theme="light") ---------- */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
 
   /* Backgrounds */
+  --bg-deep: #ffffff; /* page */
+  --bg: #f5f8fc; /* bands, wells */
+  --surface-1: #ffffff; /* cards */
+  --surface-2: #f1f5fa; /* raised cards, inputs */
+  --surface-3: #e4ebf4; /* hover */
+  --border: #dde4ee;
+  --border-strong: #b8c5d8;
+
+  /* Text (all ≥ 4.5:1 on bg-deep, bg, surface-1, surface-2) */
+  --text: #0a1a33;
+  --text-muted: #42567a;
+  --text-faint: #5a6d8e; /* never on surface-3 */
+
+  /* Brand
+     --green      = green TEXT / icons / strokes (deepened for AA on white)
+     --green-fill = the bright bio-green for filled shapes (buttons, nodes)
+     --on-green   = text/icons placed on --green-fill */
+  --green: #067442;
+  --green-fill: #2ef28c;
+  --on-green: #0a1a33;
+  --green-hover: #25e583; /* fill hover */
+  --green-deep: #0b7a45; /* borders on green elements */
+  --green-glow: rgba(46, 242, 140, 0.45);
+  --green-tint: rgba(16, 185, 102, 0.1);
+  --cyan: #046e9e;
+  --cyan-tint: rgba(4, 110, 158, 0.08);
+  --cyan-glow: rgba(60, 214, 255, 0.35);
+
+  /* Status */
+  --success: #067442;
+  --warning: #8a5a00;
+  --warning-tint: rgba(255, 194, 77, 0.18);
+  --danger: #c41e3d;
+  --danger-tint: rgba(196, 30, 61, 0.08);
+  --info: #046e9e;
+
+  /* Elevation */
+  --card-sheen: linear-gradient(180deg, rgba(241, 245, 250, 0) 40%, rgba(241, 245, 250, 0.7) 100%);
+  --holo-sheen: linear-gradient(
+    115deg,
+    rgba(46, 242, 140, 0) 20%,
+    rgba(46, 242, 140, 0.16) 40%,
+    rgba(60, 214, 255, 0.18) 55%,
+    rgba(60, 214, 255, 0) 75%
+  );
+  --overlay: rgba(10, 26, 51, 0.35);
+  --shadow-pop-color: rgba(10, 26, 51, 0.14);
+  --shadow-card-color: rgba(10, 26, 51, 0.06);
+}
+
+/* ---------- Dark navy (alternate; any subtree can opt in, e.g. the passport card) ---------- */
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  color-scheme: dark;
+
   --bg-deep: #050b18;
   --bg: #081427;
   --surface-1: #0c1d38;
@@ -22,16 +80,14 @@
   --border: #1e3a6b;
   --border-strong: #2c5494;
 
-  /* Text */
   --text: #eaf2ff;
   --text-muted: #9db2d6;
-  /* CLAUDE.md specifies #5F7AA6, which is only 3.4–4.2:1 on bg/surface-1/surface-2
-     and fails WCAG AA for normal text. Lightened (same hue) to pass 4.5:1 on
-     bg, surface-1 and surface-2. Still never use it on surface-3. */
+  /* CLAUDE.md's #5F7AA6 fails AA on bg/surface-1/surface-2; lightened, same hue. */
   --text-faint: #7c93b8;
 
-  /* Brand */
   --green: #2ef28c;
+  --green-fill: #2ef28c;
+  --on-green: #050b18;
   --green-hover: #6bffb0;
   --green-deep: #12b866;
   --green-glow: rgba(46, 242, 140, 0.35);
@@ -40,7 +96,6 @@
   --cyan-tint: rgba(60, 214, 255, 0.1);
   --cyan-glow: rgba(60, 214, 255, 0.3);
 
-  /* Status */
   --success: #2ef28c;
   --warning: #ffc24d;
   --warning-tint: rgba(255, 194, 77, 0.1);
@@ -48,12 +103,7 @@
   --danger-tint: rgba(255, 92, 122, 0.1);
   --info: #3cd6ff;
 
-  /* Card elevation: 1px border + subtle inner gradient */
-  --card-sheen: linear-gradient(
-    180deg,
-    rgba(234, 242, 255, 0.035) 0%,
-    rgba(234, 242, 255, 0) 60%
-  );
+  --card-sheen: linear-gradient(180deg, rgba(234, 242, 255, 0.035) 0%, rgba(234, 242, 255, 0) 60%);
   --holo-sheen: linear-gradient(
     115deg,
     rgba(46, 242, 140, 0) 20%,
@@ -62,22 +112,25 @@
     rgba(60, 214, 255, 0) 75%
   );
   --overlay: rgba(5, 11, 24, 0.72);
+  --shadow-pop-color: rgba(5, 11, 24, 0.9);
+  --shadow-card-color: rgba(0, 0, 0, 0);
+}
 
-  /* Motion */
+/* ---------- Shared: motion + shadcn/ui aliases ---------- */
+:root {
   --motion-fast: 150ms;
   --motion-base: 250ms;
   --motion-slow: 450ms;
   --ease-brand: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  /* ---- shadcn/ui semantic aliases → our tokens ---- */
-  --background: var(--bg);
+  --background: var(--bg-deep);
   --foreground: var(--text);
   --card: var(--surface-1);
   --card-foreground: var(--text);
-  --popover: var(--surface-2);
+  --popover: var(--surface-1);
   --popover-foreground: var(--text);
-  --primary: var(--green);
-  --primary-foreground: var(--bg-deep);
+  --primary: var(--green-fill);
+  --primary-foreground: var(--on-green);
   --secondary: var(--surface-2);
   --secondary-foreground: var(--text);
   --muted: var(--surface-2);
@@ -106,6 +159,8 @@
   --color-text-muted: var(--text-muted);
   --color-text-faint: var(--text-faint);
   --color-green: var(--green);
+  --color-green-fill: var(--green-fill);
+  --color-on-green: var(--on-green);
   --color-green-hover: var(--green-hover);
   --color-green-deep: var(--green-deep);
   --color-green-glow: var(--green-glow);
@@ -171,7 +226,8 @@
   /* Elevation */
   --shadow-glow: 0 0 24px var(--green-glow);
   --shadow-glow-cyan: 0 0 24px var(--cyan-glow);
-  --shadow-pop: 0 12px 40px -12px rgba(5, 11, 24, 0.9);
+  --shadow-pop: 0 12px 40px -12px var(--shadow-pop-color);
+  --shadow-card: 0 1px 2px var(--shadow-card-color), 0 4px 16px -8px var(--shadow-card-color);
 
   /* Motion */
   --ease-brand: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -184,6 +240,19 @@
     100% {
       background-position: -50% 0;
     }
+  }
+}
+
+/* Slow drift for the landing-page molecule background */
+@keyframes drift {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(var(--dx, 20px), var(--dy, -14px)) rotate(var(--rot, 3deg));
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
   }
 }
 
@@ -258,6 +327,18 @@
 @utility surface-raised {
   background-color: var(--surface-2);
   background-image: var(--card-sheen);
+}
+
+/* ---- Hover lift for clickable cards ---- */
+@utility hover-lift {
+  transition:
+    transform var(--motion-base) var(--ease-brand),
+    box-shadow var(--motion-base) var(--ease-brand),
+    border-color var(--motion-base) var(--ease-brand);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px -12px var(--shadow-pop-color);
+  }
 }
 
 /* ---- Focus ring: 2px cyan, used by every interactive component ---- */

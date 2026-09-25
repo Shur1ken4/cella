@@ -1,6 +1,7 @@
 "use client";
 
 import { Toaster as Sonner, type ToasterProps } from "sonner";
+import { useTheme } from "@/lib/theme";
 import {
   CircleCheck,
   Info,
@@ -10,9 +11,10 @@ import {
 } from "lucide-react";
 
 const Toaster = (props: ToasterProps) => {
+  const { theme } = useTheme();
   return (
     <Sonner
-      theme="dark"
+      theme={theme}
       position="bottom-right"
       className="toaster group"
       icons={{
@@ -25,7 +27,7 @@ const Toaster = (props: ToasterProps) => {
       toastOptions={{
         classNames: {
           toast:
-            "!rounded-md !border !border-border-strong !bg-surface-2 !text-text !shadow-pop !font-sans",
+            "!rounded-md !border !border-border-strong !bg-surface-1 !text-text !shadow-pop !font-sans",
           title: "!text-sm !font-medium",
           description: "!text-xs !text-text-muted",
           success: "!border-green-deep",

@@ -63,6 +63,9 @@ Mood: "clinical lab meets onchain finance". Deep navy space, bright bio-green si
 
 AVOID (looks like AI template): purple gradients, everything centered, identical rounded corners everywhere, Inter font, stock emoji as icons, walls of text.
 
+### Theme update (2026-09-25)
+The default theme is now LIGHT (white background). The dark navy palette below is kept as the alternate theme (`<html data-theme="dark">`, toggle in the footer) and is still used for the Passport Card and the explainer video stage. Token NAMES are the same in both themes; light values live in `app/globals.css`. In light mode `--green` is a deeper green (#067442) for text/icons so it passes AA on white, and the bright bio-green is `--green-fill` (buttons, filled shapes) with `--on-green` text on top. `--text-faint` in dark mode is #7C93B8 (the original #5F7AA6 failed AA).
+
 ### Colour tokens (define as CSS variables in globals.css and map in tailwind.config)
 Backgrounds
 - --bg-deep: #050B18 (page background)

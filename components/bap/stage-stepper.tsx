@@ -48,20 +48,23 @@ export function StageStepper({
             className="relative flex min-w-[92px] flex-1 snap-center flex-col items-center gap-2 px-1 text-center"
           >
             {!last && (
-              <span
-                aria-hidden="true"
-                className={cn(
-                  "absolute top-4 left-1/2 h-px w-full",
-                  done ? "bg-green-deep" : "bg-border"
+              <span aria-hidden="true" className="absolute top-4 left-1/2 h-0.5 w-full bg-border">
+                {done && (
+                  <motion.span
+                    className="block h-full origin-left bg-green-deep"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: 0.15 + i * 0.12, duration: 0.35 }}
+                  />
                 )}
-              />
+              </span>
             )}
 
             <span className="relative z-10 grid size-8 place-items-center">
               {isCurrent && (
                 <motion.span
                   aria-hidden="true"
-                  className="absolute inset-0 rounded-full bg-green"
+                  className="absolute inset-0 rounded-full bg-green-fill"
                   initial={{ scale: 1, opacity: 0.5 }}
                   animate={{ scale: 1.8, opacity: 0 }}
                   transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
@@ -69,9 +72,9 @@ export function StageStepper({
               )}
               <span
                 className={cn(
-                  "relative grid size-8 place-items-center rounded-full border text-xs font-medium",
+                  "relative grid size-8 place-items-center rounded-full border text-xs font-medium transition-colors duration-450",
                   done && "border-green-deep bg-green-tint text-green",
-                  isCurrent && "border-green-deep bg-green text-bg-deep shadow-glow",
+                  isCurrent && "border-green-deep bg-green-fill text-on-green shadow-glow",
                   !done && !isCurrent && "border-border-strong bg-bg text-text-faint"
                 )}
               >

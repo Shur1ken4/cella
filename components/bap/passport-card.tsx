@@ -49,7 +49,7 @@ export function PassportCard({
 
   return (
     // Container query: keep the ID-card ratio only when there is room for the content.
-    <div className={cn("@container w-full max-w-[520px]", className)}>
+    <div data-theme="dark" className={cn("@container w-full max-w-[520px] text-text", className)}>
       <motion.article
         initial={animate ? { opacity: 0, y: 16, rotateX: 8 } : false}
         animate={{ opacity: 1, y: 0, rotateX: 0 }}

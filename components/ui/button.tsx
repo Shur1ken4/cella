@@ -16,14 +16,15 @@ const buttonVariants = cva(
     "active:translate-y-px data-[preview=active]:translate-y-px",
     "disabled:cursor-not-allowed disabled:opacity-45 aria-busy:cursor-progress",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0",
+    "[&_.lucide-arrow-right]:transition-transform [&_.lucide-arrow-right]:duration-150 hover:[&_.lucide-arrow-right]:translate-x-0.5",
   ],
   {
     variants: {
       variant: {
         primary: [
-          "border-green-deep bg-green text-bg-deep",
+          "border-green-deep bg-green-fill text-on-green",
           "hover:enabled:bg-green-hover hover:enabled:shadow-glow data-[preview=hover]:bg-green-hover data-[preview=hover]:shadow-glow",
-          "active:enabled:bg-green-deep data-[preview=active]:bg-green-deep",
+          "active:enabled:brightness-95 data-[preview=active]:brightness-95",
         ],
         secondary: [
           "border-border-strong bg-surface-2 text-text",

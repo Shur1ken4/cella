@@ -7,11 +7,11 @@ const cardVariants = cva(
   {
     variants: {
       variant: {
-        default: "surface-card border border-border",
+        default: "surface-card border border-border shadow-card",
         raised: "surface-raised border border-border-strong",
         verified: "surface-card border border-green-deep shadow-glow",
         interactive:
-          "surface-card border border-border focus-within:border-border-strong hover:border-border-strong",
+          "surface-card border border-border shadow-card focus-within:border-border-strong hover:border-border-strong",
       },
       padding: {
         none: "",

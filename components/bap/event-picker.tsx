@@ -95,7 +95,7 @@ export function EventPicker({ role, signed, value, onChange }: EventPickerProps)
                 {already ? copy.sign.alreadySigned : signerLabel(schema)}
               </span>
             </span>
-            {active && <span className="size-2.5 shrink-0 rounded-full bg-green shadow-glow" aria-hidden="true" />}
+            {active && <span className="size-2.5 shrink-0 rounded-full bg-green-fill shadow-glow" aria-hidden="true" />}
           </button>
         );
 

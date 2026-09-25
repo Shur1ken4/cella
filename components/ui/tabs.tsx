@@ -64,7 +64,7 @@ function TabsTrigger({
       className={cn(
         "relative inline-flex h-full flex-1 items-center justify-center gap-1.5 rounded-sm border border-transparent px-3 text-sm font-medium whitespace-nowrap text-text-muted transition-colors duration-150 ease-brand focus-ring hover:text-text disabled:pointer-events-none disabled:opacity-45 group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "group-data-[variant=default]/tabs-list:data-active:border-border-strong group-data-[variant=default]/tabs-list:data-active:bg-surface-3 group-data-[variant=default]/tabs-list:data-active:text-text",
-        "after:absolute after:bg-green after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:-bottom-1.5 group-data-horizontal/tabs:after:h-0.5 group-data-[variant=line]/tabs-list:data-active:text-text group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
+        "after:absolute after:bg-green-fill after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:-bottom-1.5 group-data-horizontal/tabs:after:h-0.5 group-data-[variant=line]/tabs-list:data-active:text-text group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
         className
       )}
       {...props}

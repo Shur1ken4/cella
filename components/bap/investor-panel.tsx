@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AddressChip } from "@/components/ui/address-chip";
 import { StepPills } from "./step-pills";
+import { AnimatedNumber } from "@/components/motion/animated-number";
 
 type InvestorPanelProps = {
   vault: Vault;
@@ -47,7 +48,8 @@ export function InvestorPanel({
   const left = vault.target - vault.totalDeposited;
   const maxDeposit = Math.max(0, Math.min(balance, left));
   const parsed = Number(amount.replace(/,/g, ""));
-  const canDeposit = !!investor?.kycVerified && vault.depositsOpen && parsed > 0;
+  const canDeposit =
+    !!investor?.kycVerified && vault.depositsOpen && parsed > 0;
 
   const done = [
     balance > 0 || (position?.deposited ?? 0) > 0,
@@ -74,15 +76,31 @@ export function InvestorPanel({
 
       {/* position */}
       <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {[
-          [t.walletBalance, loading ? null : formatAmount(balance)],
-          [t.deposited, loading ? null : formatAmount(position!.deposited)],
-          [t.share, loading ? null : formatPercent(position!.share, 1)],
-          [t.claimable, loading ? null : formatAmount(position!.claimable)],
-        ].map(([label, value]) => (
-          <div key={label} className="rounded-md border border-border bg-surface-1 p-3">
+        {(
+          [
+            [
+              t.walletBalance,
+              loading ? null : <AnimatedNumber value={balance} />,
+            ],
+            [
+              t.deposited,
+              loading ? null : <AnimatedNumber value={position!.deposited} />,
+            ],
+            [t.share, loading ? null : formatPercent(position!.share, 1)],
+            [
+              t.claimable,
+              loading ? null : <AnimatedNumber value={position!.claimable} />,
+            ],
+          ] as [string, React.ReactNode][]
+        ).map(([label, value]) => (
+          <div
+            key={label}
+            className="rounded-md border border-border bg-surface-1 p-3"
+          >
             <dt className="type-caption text-text-faint">{label}</dt>
-            <dd className="nums mt-0.5 text-lg text-text">{value ?? <Skeleton className="h-6 w-16" />}</dd>
+            <dd className="nums mt-0.5 text-lg text-text">
+              {value ?? <Skeleton className="h-6 w-16" />}
+            </dd>
           </div>
         ))}
       </dl>
@@ -96,7 +114,12 @@ export function InvestorPanel({
             <BadgeCheck className="size-4" aria-hidden="true" /> {t.verified}
           </span>
         ) : (
-          <Button variant="secondary" loading={pending.kyc} disabled={loading} onClick={onKyc}>
+          <Button
+            variant="secondary"
+            loading={pending.kyc}
+            disabled={loading}
+            onClick={onKyc}
+          >
             <UserCheck aria-hidden="true" /> {t.kyc}
           </Button>
         )}
@@ -113,7 +136,8 @@ export function InvestorPanel({
         <div className="flex items-center justify-between gap-3">
           <Label htmlFor="deposit-amount">{t.amount}</Label>
           <span className="type-caption text-text-faint">
-            <span className="nums text-text-muted">{formatAmount(left)}</span> {t.remaining}
+            <span className="nums text-text-muted">{formatAmount(left)}</span>{" "}
+            {t.remaining}
           </span>
         </div>
         {vault.depositsOpen ? (
@@ -125,7 +149,9 @@ export function InvestorPanel({
                 autoComplete="off"
                 placeholder={maxDeposit > 0 ? formatAmount(maxDeposit) : "0"}
                 value={amount}
-                onChange={(e) => setAmount(e.target.value.replace(/[^0-9.,]/g, ""))}
+                onChange={(e) =>
+                  setAmount(e.target.value.replace(/[^0-9.,]/g, ""))
+                }
                 className="nums pr-16"
               />
               <button
@@ -137,7 +163,11 @@ export function InvestorPanel({
                 {t.max}
               </button>
             </div>
-            <Button type="submit" disabled={!canDeposit} loading={pending.deposit}>
+            <Button
+              type="submit"
+              disabled={!canDeposit}
+              loading={pending.deposit}
+            >
               {t.deposit}
             </Button>
           </div>
@@ -156,12 +186,17 @@ export function InvestorPanel({
         <HandCoins aria-hidden="true" />
         {t.claim}
         {position && position.claimable > 0 && (
-          <span className="nums">· {formatAmount(position.claimable)} {copy.units.token}</span>
+          <span className="nums">
+            · {formatAmount(position.claimable)} {copy.units.token}
+          </span>
         )}
       </Button>
       {position && position.claimed > 0 && (
         <p className="type-caption -mt-2 text-center text-text-muted">
-          {t.claimed}: <span className="nums text-green">{formatAmount(position.claimed)} {copy.units.token}</span>
+          {t.claimed}:{" "}
+          <span className="nums text-green">
+            {formatAmount(position.claimed)} {copy.units.token}
+          </span>
         </p>
       )}
     </Card>

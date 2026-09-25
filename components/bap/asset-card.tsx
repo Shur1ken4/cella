@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowUpRight, FileCheck2, Landmark } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { copy } from "@/lib/copy";
@@ -15,18 +16,26 @@ import { HexPattern } from "./hex-pattern";
 import { InstitutionIcon } from "./institution-icon";
 
 /** Dashboard tile for one asset: a mini passport with lifecycle + funding at a glance. */
-export function AssetCard({ asset, className }: { asset: Asset; className?: string }) {
+export function AssetCard({
+  asset,
+  className,
+}: {
+  asset: Asset;
+  className?: string;
+}) {
   const p = asset.passport;
   const atts = useAttestations(p.id);
   const vault = useVault(asset.vaultId);
-  const signed = atts.data?.filter((a) => a.schemaKey !== "KYC_VERIFIED").length;
+  const signed = atts.data?.filter(
+    (a) => a.schemaKey !== "KYC_VERIFIED"
+  ).length;
   const v = vault.data;
 
   return (
     <Link
       href={`/asset/${p.id}`}
       className={cn(
-        "group relative isolate flex flex-col gap-5 overflow-hidden rounded-lg border border-border surface-card p-5 transition-[border-color,box-shadow] duration-250 ease-brand hover:border-green-deep hover:shadow-glow focus-ring",
+        "group relative isolate flex flex-col gap-5 overflow-hidden rounded-lg border border-border surface-card p-5 shadow-card hover-lift hover:border-green-deep focus-ring",
         className
       )}
     >
@@ -34,11 +43,16 @@ export function AssetCard({ asset, className }: { asset: Asset; className?: stri
 
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <HexFrame className="size-11 shrink-0 text-green" fillClassName="fill-green-tint">
+          <HexFrame
+            className="size-11 shrink-0 text-green"
+            fillClassName="fill-green-tint"
+          >
             <InstitutionIcon kind="owner" className="size-5" />
           </HexFrame>
           <div>
-            <h3 className="font-heading text-lg leading-tight font-semibold text-text">{p.name}</h3>
+            <h3 className="font-heading text-lg leading-tight font-semibold text-text">
+              {p.name}
+            </h3>
             <p className="nums text-xs tracking-[0.15em] text-cyan">{p.code}</p>
           </div>
         </div>
@@ -54,11 +68,21 @@ export function AssetCard({ asset, className }: { asset: Asset; className?: stri
           {copy.stages.map((s, i) => (
             <span
               key={s}
-              className={cn(
-                "h-1.5 flex-1 rounded-full",
-                i < p.stage ? "bg-green-deep" : i === p.stage ? "bg-green shadow-glow" : "bg-surface-3"
+              className="h-1.5 flex-1 overflow-hidden rounded-full bg-surface-3"
+            >
+              {i <= p.stage && (
+                <motion.span
+                  className={cn(
+                    "block h-full origin-left rounded-full",
+                    i < p.stage ? "bg-green-deep" : "bg-green-fill shadow-glow"
+                  )}
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.07, duration: 0.35 }}
+                />
               )}
-            />
+            </span>
           ))}
         </div>
         <p className="type-caption mt-2 text-text-muted">
@@ -84,7 +108,8 @@ export function AssetCard({ asset, className }: { asset: Asset; className?: stri
               <span className="nums">
                 {formatCompact(v.totalDeposited)} / {formatCompact(v.target)}
               </span>{" "}
-              · {formatPercent(v.totalDeposited / v.target)} {copy.dashboard.raised}
+              · {formatPercent(v.totalDeposited / v.target)}{" "}
+              {copy.dashboard.raised}
             </Badge>
           ) : (
             <Skeleton className="h-6 w-32" />

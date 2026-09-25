@@ -37,9 +37,13 @@ const RUNGS = [12.5, 37.5, 62.5, 87.5].map((y) => {
   return { y, x1: CX - Math.abs(dx), x2: CX + Math.abs(dx) };
 });
 
-function StrandSegment({ attested, last }: { attested: boolean; last: boolean }) {
+function StrandSegment({ attested, last, delay }: { attested: boolean; last: boolean; delay: number }) {
   return (
-    <svg
+    <motion.svg
+      initial={{ clipPath: "inset(0 0 100% 0)" }}
+      whileInView={{ clipPath: "inset(0 0 0% 0)" }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
       viewBox="0 0 48 100"
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -68,7 +72,7 @@ function StrandSegment({ attested, last }: { attested: boolean; last: boolean })
           strokeOpacity={attested ? 0.8 : 1}
         />
       ))}
-    </svg>
+    </motion.svg>
   );
 }
 
@@ -94,14 +98,14 @@ export function StrandTimeline({ events, animate = true, className }: StrandTime
           >
             {/* strand + node */}
             <div className="relative">
-              <StrandSegment attested={attested} last={last} />
+              <StrandSegment attested={attested} last={last} delay={animate ? i * 0.12 : 0} />
               <span className="absolute top-4 left-1/2 -translate-x-1/2">
                 {attested ? (
                   <motion.span
                     initial={animate ? { scale: 0 } : false}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 500, damping: 20, delay: animate ? i * 0.08 + 0.15 : 0 }}
-                    className="grid size-6 place-items-center rounded-full border-2 border-bg-deep bg-green text-bg-deep shadow-glow"
+                    className="grid size-6 place-items-center rounded-full border-2 border-bg-deep bg-green-fill text-on-green shadow-glow"
                   >
                     <Check className="size-3.5" strokeWidth={3} aria-hidden="true" />
                   </motion.span>
