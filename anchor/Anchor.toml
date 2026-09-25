@@ -1,0 +1,18 @@
+[toolchain]
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.devnet]
+passport = "9JTETAXHHUsDQyNKXYjBqKmeEZ6n1VSRH9nRCpf2x9JW"
+vault = "F68Q3DdSzz1m4Gq2QSBiwoKSsVyHfaDbUrUputmbW3jS"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "cargo test"
+
+[hooks]
