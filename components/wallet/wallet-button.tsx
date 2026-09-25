@@ -6,9 +6,10 @@ import { useBalance } from "@/lib/solana/hooks/use-balance";
 import { lamportsToSolString } from "@/lib/solana/format";
 import { ellipsify, getExplorerUrl } from "@/lib/solana/explorer";
 import { copy } from "@/lib/copy";
+import { Button } from "@/components/ui/button";
 
 const itemClass =
-  "flex-1 cursor-pointer rounded-md border border-border bg-card px-3 py-2 text-center text-xs font-medium transition hover:bg-accent focus-visible:outline-2 focus-visible:outline-ring";
+  "flex-1 cursor-pointer rounded-md border border-border-strong bg-surface-2 px-3 py-2 text-center text-xs font-medium text-text transition-colors duration-150 ease-brand hover:bg-surface-3 focus-ring";
 
 export function WalletButton() {
   const { connectors, connect, disconnect, wallet, status, error } =
@@ -48,25 +49,25 @@ export function WalletButton() {
   if (status !== "connected" || !address) {
     return (
       <div className="relative" ref={ref}>
-        <button
+        <Button
           onClick={() => setIsOpen((o) => !o)}
           aria-expanded={isOpen}
           aria-haspopup="menu"
-          className="cursor-pointer rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          loading={status === "connecting"}
         >
           {copy.wallet.connect}
-        </button>
+        </Button>
 
         {isOpen && (
           <div
             role="menu"
-            className="absolute right-0 top-full z-50 mt-2 w-64 rounded-lg border border-border bg-card p-3 shadow-lg"
+            className="absolute right-0 top-full z-50 mt-2 w-64 rounded-lg border border-border-strong bg-surface-2 p-3 shadow-pop"
           >
-            <p className="mb-2 text-xs font-medium text-muted-foreground">
+            <p className="mb-2 text-xs font-medium text-text-muted">
               {copy.wallet.chooseWallet}
             </p>
             {connectors.length === 0 && (
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-text-muted">
                 {copy.wallet.noWallets}
               </p>
             )}
@@ -84,7 +85,7 @@ export function WalletButton() {
                     }
                   }}
                   disabled={status === "connecting"}
-                  className="flex w-full cursor-pointer items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm font-medium transition hover:bg-accent focus-visible:outline-2 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50"
+                  className="flex w-full cursor-pointer items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm font-medium text-text transition-colors duration-150 ease-brand hover:bg-surface-3 focus-ring disabled:pointer-events-none disabled:opacity-45"
                 >
                   {connector.icon && (
                     // eslint-disable-next-line @next/next/no-img-element -- wallet icons are data: URIs
@@ -95,12 +96,12 @@ export function WalletButton() {
               ))}
             </div>
             {status === "connecting" && (
-              <p className="mt-2 text-xs text-muted-foreground">
+              <p className="mt-2 text-xs text-text-muted">
                 {copy.wallet.connecting}
               </p>
             )}
             {error != null && (
-              <p className="mt-2 text-xs text-destructive">
+              <p className="mt-2 text-xs text-danger">
                 {error instanceof Error ? error.message : String(error)}
               </p>
             )}
@@ -116,33 +117,33 @@ export function WalletButton() {
         onClick={() => setIsOpen((o) => !o)}
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        className="flex cursor-pointer items-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-xs font-medium transition hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        className="flex h-10 cursor-pointer items-center gap-2 rounded-md border border-border-strong bg-surface-2 px-3 text-xs font-medium text-text transition-colors duration-150 ease-brand hover:bg-surface-3 focus-ring"
       >
-        <span className="h-2 w-2 rounded-full bg-primary" aria-hidden="true" />
-        <span className="font-mono">{ellipsify(address, 4)}</span>
+        <span className="h-2 w-2 rounded-full bg-green shadow-glow" aria-hidden="true" />
+        <span className="nums text-cyan">{ellipsify(address, 4)}</span>
       </button>
 
       {isOpen && (
         <div
           role="menu"
-          className="absolute right-0 top-full z-50 mt-2 w-72 rounded-lg border border-border bg-card p-4 shadow-lg"
+          className="absolute right-0 top-full z-50 mt-2 w-72 rounded-lg border border-border-strong bg-surface-2 p-4 shadow-pop"
         >
           <div className="mb-3">
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-text-muted">
               {copy.wallet.balance}
             </p>
-            <p className="font-mono text-lg font-bold tabular-nums">
+            <p className="nums text-lg font-medium text-text">
               {balance.lamports != null
                 ? lamportsToSolString(balance.lamports)
                 : "—"}{" "}
-              <span className="text-sm font-normal text-muted-foreground">
+              <span className="text-sm font-normal text-text-muted">
                 SOL (devnet)
               </span>
             </p>
           </div>
 
           <div className="mb-3 rounded-md border border-border px-3 py-2">
-            <p className="break-all font-mono text-xs">{address}</p>
+            <p className="nums break-all text-xs text-cyan">{address}</p>
           </div>
 
           <div className="flex gap-2">
@@ -164,7 +165,7 @@ export function WalletButton() {
               void disconnect();
               close();
             }}
-            className="mt-2 w-full cursor-pointer rounded-md border border-border bg-card px-3 py-2 text-xs font-medium text-destructive transition hover:bg-destructive/10 focus-visible:outline-2 focus-visible:outline-ring"
+            className="mt-2 w-full cursor-pointer rounded-md border border-danger/40 bg-danger-tint px-3 py-2 text-xs font-medium text-danger transition-colors duration-150 ease-brand hover:bg-danger/20 focus-ring"
           >
             {copy.wallet.disconnect}
           </button>

@@ -2,145 +2,313 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* =============================================================================
+   Biotech Asset Passport — design tokens (CLAUDE.md §4)
+   This file is the ONLY place raw colour values may appear.
+   Dark navy is the only theme.
+   ========================================================================== */
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --border: oklch(0.922 0 0);
-  --border-low: #f5f5f5;
-  --input: oklch(0.922 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --cream: #f5f5f5;
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: #ef4444;
-  --ring: oklch(0.708 0 0);
-  --radius: 0.625rem;
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --font-sans: system-ui, sans-serif; /* Phase 1: IBM Plex Sans */
-  --font-mono: ui-monospace, monospace; /* Phase 1: JetBrains Mono */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  color-scheme: dark;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --border-low: rgba(38, 38, 38, 0.5);
-  --input: oklch(1 0 0 / 15%);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --cream: #262626;
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: #ef4444;
-  --ring: oklch(0.556 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Backgrounds */
+  --bg-deep: #050b18;
+  --bg: #081427;
+  --surface-1: #0c1d38;
+  --surface-2: #12284d;
+  --surface-3: #1a3566;
+  --border: #1e3a6b;
+  --border-strong: #2c5494;
+
+  /* Text */
+  --text: #eaf2ff;
+  --text-muted: #9db2d6;
+  /* CLAUDE.md specifies #5F7AA6, which is only 3.4–4.2:1 on bg/surface-1/surface-2
+     and fails WCAG AA for normal text. Lightened (same hue) to pass 4.5:1 on
+     bg, surface-1 and surface-2. Still never use it on surface-3. */
+  --text-faint: #7c93b8;
+
+  /* Brand */
+  --green: #2ef28c;
+  --green-hover: #6bffb0;
+  --green-deep: #12b866;
+  --green-glow: rgba(46, 242, 140, 0.35);
+  --green-tint: rgba(46, 242, 140, 0.1);
+  --cyan: #3cd6ff;
+  --cyan-tint: rgba(60, 214, 255, 0.1);
+  --cyan-glow: rgba(60, 214, 255, 0.3);
+
+  /* Status */
+  --success: #2ef28c;
+  --warning: #ffc24d;
+  --warning-tint: rgba(255, 194, 77, 0.1);
+  --danger: #ff5c7a;
+  --danger-tint: rgba(255, 92, 122, 0.1);
+  --info: #3cd6ff;
+
+  /* Card elevation: 1px border + subtle inner gradient */
+  --card-sheen: linear-gradient(
+    180deg,
+    rgba(234, 242, 255, 0.035) 0%,
+    rgba(234, 242, 255, 0) 60%
+  );
+  --holo-sheen: linear-gradient(
+    115deg,
+    rgba(46, 242, 140, 0) 20%,
+    rgba(46, 242, 140, 0.14) 40%,
+    rgba(60, 214, 255, 0.16) 55%,
+    rgba(60, 214, 255, 0) 75%
+  );
+  --overlay: rgba(5, 11, 24, 0.72);
+
+  /* Motion */
+  --motion-fast: 150ms;
+  --motion-base: 250ms;
+  --motion-slow: 450ms;
+  --ease-brand: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* ---- shadcn/ui semantic aliases → our tokens ---- */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface-1);
+  --card-foreground: var(--text);
+  --popover: var(--surface-2);
+  --popover-foreground: var(--text);
+  --primary: var(--green);
+  --primary-foreground: var(--bg-deep);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--text);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--surface-3);
+  --accent-foreground: var(--text);
+  --destructive: var(--danger);
+  --destructive-foreground: var(--bg-deep);
+  --input: var(--border-strong);
+  --ring: var(--cyan);
+  --radius: 10px;
 }
 
 @theme inline {
+  /* Remove Tailwind's default palette: only our tokens can be used. */
+  --color-*: initial;
+
+  --color-bg-deep: var(--bg-deep);
+  --color-bg: var(--bg);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-green: var(--green);
+  --color-green-hover: var(--green-hover);
+  --color-green-deep: var(--green-deep);
+  --color-green-glow: var(--green-glow);
+  --color-green-tint: var(--green-tint);
+  --color-cyan: var(--cyan);
+  --color-cyan-tint: var(--cyan-tint);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-warning-tint: var(--warning-tint);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-info: var(--info);
+  --color-overlay: var(--overlay);
+
+  /* shadcn aliases */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-border: var(--border);
-  --color-border-low: var(--border-low);
-  --color-input: var(--input);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-cream: var(--cream);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Typography — families come from next/font variables set in app/layout.tsx */
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Type scale (size / line-height) — standard keys remapped to our scale */
+  --text-xs: 12px; /* caption */
+  --text-xs--line-height: 18px;
+  --text-sm: 14px; /* small */
+  --text-sm--line-height: 22px;
+  --text-base: 16px; /* body */
+  --text-base--line-height: 26px;
+  --text-xl: 22px; /* h3 */
+  --text-xl--line-height: 30px;
+  --text-3xl: 30px; /* h2 */
+  --text-3xl--line-height: 38px;
+  --text-4xl: 40px; /* h1 */
+  --text-4xl--line-height: 48px;
+  --text-6xl: 56px; /* display */
+  --text-6xl--line-height: 60px;
+
+  /* Radius: sm badges/inputs · md buttons · lg cards · xl hero panels */
+  --radius-*: initial;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Elevation */
+  --shadow-glow: 0 0 24px var(--green-glow);
+  --shadow-glow-cyan: 0 0 24px var(--cyan-glow);
+  --shadow-pop: 0 12px 40px -12px rgba(5, 11, 24, 0.9);
+
+  /* Motion */
+  --ease-brand: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --animate-shimmer: shimmer 3.5s var(--ease-brand) infinite;
+  @keyframes shimmer {
+    0% {
+      background-position: 150% 0;
+    }
+    100% {
+      background-position: -50% 0;
+    }
+  }
+}
+
+/* ---- Typography utilities (CLAUDE.md scale) ---- */
+@utility type-display {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 60px;
+  letter-spacing: -0.02em;
+}
+@utility type-h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.015em;
+}
+@utility type-h2 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 38px;
+  letter-spacing: -0.01em;
+}
+@utility type-h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+}
+@utility type-body {
+  font-size: 16px;
+  line-height: 26px;
+}
+@utility type-small {
+  font-size: 14px;
+  line-height: 22px;
+}
+@utility type-caption {
+  font-size: 12px;
+  line-height: 18px;
+}
+/* Small uppercase label used above stats and on the passport card */
+@utility type-label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+/* Numbers in stats and balances: mono + tabular figures */
+@utility nums {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Surfaces ---- */
+/* Card background: surface + subtle inner gradient. Pair with `border border-border`. */
+@utility surface-card {
+  background-color: var(--surface-1);
+  background-image: var(--card-sheen);
+}
+@utility surface-raised {
+  background-color: var(--surface-2);
+  background-image: var(--card-sheen);
+}
+
+/* ---- Focus ring: 2px cyan, used by every interactive component ---- */
+@utility focus-ring {
+  outline: none;
+  &:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+  }
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+
+  html {
+    background-color: var(--bg-deep);
   }
 
   body {
-    @apply antialiased bg-background text-foreground;
-    font-family: var(--font-sans);
+    @apply bg-bg-deep text-text font-sans antialiased;
+    font-size: 16px;
+    line-height: 26px;
   }
-  button:not(:disabled), [role="button"]:not(:disabled) {
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--green-tint);
+    color: var(--text);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
     cursor: pointer;
   }
-  html {
-    @apply font-sans;
+}
+
+/* Respect reduced motion: disable non-essential animation globally.
+   Framer Motion is also set to reducedMotion="user" in components/providers.tsx. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

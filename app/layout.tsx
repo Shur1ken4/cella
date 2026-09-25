@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { copy } from "@/lib/copy";
-
-// Fonts (Space Grotesk / IBM Plex Sans / JetBrains Mono) are added in Phase 1.
+import { fontVariables } from "./fonts";
 
 export const metadata: Metadata = {
   title: copy.site.name,
@@ -21,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className="antialiased">
+    <html lang="en" className={`dark ${fontVariables}`} suppressHydrationWarning>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>
