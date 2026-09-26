@@ -56,7 +56,7 @@ export function PassportCard({
         transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
         aria-label={`${copy.passport.title}: ${name} (${code})`}
         className={cn(
-          "group/passport relative isolate w-full overflow-hidden rounded-xl border bg-surface-1 p-5 shadow-pop @[440px]:aspect-[1.586] @[440px]:p-6",
+          "group/passport relative isolate w-full overflow-hidden rounded-xl border bg-surface-1 p-5 shadow-pop @[440px]:p-6",
           verified ? "border-green-deep/70" : "border-border-strong"
         )}
       >
@@ -73,7 +73,7 @@ export function PassportCard({
 
         <div className="flex h-full flex-col gap-4">
           {/* header */}
-          <header className="flex items-center justify-between gap-3">
+          <header className="flex items-center gap-3">
             <div className="flex items-center gap-2.5">
               <HexFrame
                 className="size-9 text-green"
@@ -88,16 +88,7 @@ export function PassportCard({
                 <p className="type-caption text-text-faint">Solana · devnet</p>
               </div>
             </div>
-            {/* the "chip" of an ID card */}
-            <div
-              aria-hidden="true"
-              className="grid h-8 w-11 grid-cols-3 gap-px overflow-hidden rounded-sm border border-green-deep/60 bg-green-deep/30 p-px"
-            >
-              {Array.from({ length: 6 }).map((_, i) => (
-                <span key={i} className="bg-surface-2/80" />
-              ))}
-            </div>
-          </header>
+            </header>
 
           {/* identity */}
           <div>
