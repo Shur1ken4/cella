@@ -42,9 +42,7 @@ export function SceneTagline({ progress: p }: SceneProps) {
         <div className="flex items-center gap-4">
           <LogoMark className="size-16" />
           <div>
-            <p className="font-heading text-3xl font-bold text-text">
-              Biotech Asset <span className="text-green">Passport</span>
-            </p>
+            <p className="font-heading text-5xl font-bold tracking-tight text-text">{copy.site.name}</p>
             <p className="type-label text-text-muted">
               {copy.site.tagline} · {l.onSolana}
             </p>

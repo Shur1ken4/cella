@@ -31,8 +31,8 @@ export function Logo({ className, compact = false }: { className?: string; compa
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark />
       {!compact && (
-        <span className="font-heading text-base leading-tight font-semibold text-text">
-          Biotech Asset <span className="text-green">Passport</span>
+        <span className="font-heading text-xl leading-tight font-bold tracking-tight text-text">
+          {copy.site.name}
           <span className="sr-only"> — {copy.site.tagline}</span>
         </span>
       )}

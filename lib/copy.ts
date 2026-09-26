@@ -2,8 +2,8 @@
 
 export const copy = {
   site: {
-    name: "Biotech Asset Passport",
-    shortName: "BAP",
+    name: "Cella",
+    shortName: "Cella",
     pitch: "Verified biotech assets, financeable on Solana.",
     tagline: "Verified. Funded. Paid.",
   },
@@ -64,7 +64,7 @@ export const copy = {
   },
 
   passport: {
-    title: "Biotech Asset Passport",
+    title: "Cella Passport",
     verifiedStamp: "Verified onchain",
     pendingStamp: "Awaiting signatures",
     fields: {
@@ -143,7 +143,7 @@ export const copy = {
     menu: "Open menu",
     closeMenu: "Close menu",
     skipToContent: "Skip to content",
-    home: "Biotech Asset Passport home",
+    home: "Cella home",
   },
 
   footer: {
@@ -591,7 +591,7 @@ export const copy = {
   design: {
     title: "Design system",
     intro:
-      "Living style guide for Biotech Asset Passport. Every token, component and state on one page.",
+      "Living style guide for Cella. Every token, component and state on one page.",
     sections: {
       colours: "Colour tokens",
       type: "Typography",

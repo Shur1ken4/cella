@@ -1,4 +1,6 @@
-# Biotech Asset Passport — Project Rulebook
+# Cella — Project Rulebook
+
+Product name: **Cella** (renamed from "Biotech Asset Passport" on 2026-09-26). The on-chain record is still called the asset "passport".
 
 ## 1. What we are building
 A Colosseum (Solana) hackathon demo. A biotech asset (drug candidate) gets a PASSPORT on Solana. Institutions that hold rights in the asset (University, Lab/CRO, Pharma licensee) SIGN key events as attestations. Investors fund the asset through a VAULT in USDC, and are paid automatically when an attested milestone is reached.

@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 
 /* =============================================================================
-   Biotech Asset Passport — design tokens (CLAUDE.md §4)
+   Cella — design tokens (CLAUDE.md §4)
    This file is the ONLY place raw colour values may appear.
    Default theme: LIGHT (white). The original dark navy theme is kept as an
    alternate: <html data-theme="dark">. Token NAMES are identical in both.
