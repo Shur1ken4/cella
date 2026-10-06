@@ -14,6 +14,7 @@ import type {
   Vault,
 } from "./types";
 import { createMockDataSource } from "./mock";
+import { DATA_SOURCE } from "./source";
 
 export interface DataSource {
   readonly kind: "mock" | "onchain";
@@ -46,10 +47,7 @@ export interface DataSource {
   reset?(): Promise<void>;
 }
 
-export type DataSourceKind = DataSource["kind"];
-
-export const DATA_SOURCE: DataSourceKind =
-  process.env.NEXT_PUBLIC_DATA_SOURCE === "onchain" ? "onchain" : "mock";
+export { DATA_SOURCE, SIMULATED, type DataSourceKind } from "./source";
 
 let instance: DataSource | null = null;
 

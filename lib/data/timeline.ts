@@ -3,6 +3,7 @@ import { getExplorerUrl } from "@/lib/solana/explorer";
 import { formatDate } from "@/lib/format";
 import type { TimelineEvent } from "@/components/bap/strand-timeline";
 import { ASSET_SCHEMAS, SCHEMA_SIGNER } from "./schemas";
+import { SIMULATED } from "./source";
 import type { Attestation } from "./types";
 
 /** One timeline row per asset schema, in lifecycle order: signed or pending. */
@@ -18,7 +19,8 @@ export function buildTimeline(attestations: Attestation[]): TimelineEvent[] {
           kind: a.attester.role,
           status: "attested" as const,
           date: formatDate(a.createdAt),
-          explorerUrl: getExplorerUrl(`/tx/${a.signature}`),
+          // Simulated signatures don't exist on devnet, so don't link them.
+          explorerUrl: SIMULATED ? undefined : getExplorerUrl(`/tx/${a.signature}`),
           note: a.note,
         }
       : {

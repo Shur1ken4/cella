@@ -1,6 +1,7 @@
 import { FlaskConical } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { copy } from "@/lib/copy";
+import { SIMULATED } from "@/lib/data/source";
 
 type DemoBannerProps = {
   /** Institution being signed as, e.g. "Northbridge University". */
@@ -27,7 +28,9 @@ export function DemoBanner({ institution, hint = true, className }: DemoBannerPr
       <div className="min-w-0">
         <p className="type-label text-warning">{copy.demo.banner(institution)}</p>
         {hint && (
-          <p className="type-caption text-text-muted">{copy.demo.bannerHint}</p>
+          <p className="type-caption text-text-muted">
+            {SIMULATED ? copy.demo.bannerHintSimulated : copy.demo.bannerHint}
+          </p>
         )}
       </div>
     </div>

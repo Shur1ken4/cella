@@ -147,7 +147,7 @@ export function InvestorPanel({
                 id="deposit-amount"
                 inputMode="decimal"
                 autoComplete="off"
-                placeholder={maxDeposit > 0 ? formatAmount(maxDeposit) : "0"}
+                placeholder={maxDeposit > 0 ? t.amountPlaceholder(formatAmount(maxDeposit)) : "0"}
                 value={amount}
                 onChange={(e) =>
                   setAmount(e.target.value.replace(/[^0-9.,]/g, ""))

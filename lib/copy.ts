@@ -119,12 +119,14 @@ export const copy = {
     confirmed: "Transaction confirmed",
     failed: "Transaction failed",
     viewOnExplorer: "View on Explorer",
+    simulated: "Simulated transaction",
   },
 
   demo: {
     banner: (institution: string) =>
       `DEMO MODE — signing as ${institution} (devnet)`,
     bannerHint: "Institution signatures use devnet demo keys held by the server.",
+    bannerHintSimulated: "Preview: signatures are simulated in your browser. Onchain programs are in progress.",
   },
 
   empty: {
@@ -148,7 +150,7 @@ export const copy = {
 
   footer: {
     mockData: "Mock data",
-    mockDataHint: "Phase 2 preview: actions are simulated in your browser.",
+    mockDataHint: "Preview: actions are simulated in your browser. Onchain programs are in progress.",
     resetDemo: "Reset demo",
     resetDone: "Demo data reset",
     darkTheme: "Dark theme",
@@ -314,6 +316,7 @@ export const copy = {
       amount: "Deposit amount",
       deposit: "Deposit",
       max: "Max",
+      amountPlaceholder: (max: string) => `Up to ${max}`,
       claim: "Claim payout",
       walletBalance: "Wallet balance",
       deposited: "Deposited",
@@ -490,8 +493,8 @@ export const copy = {
     },
     finalCta: {
       title: "See it working in two minutes",
-      body: "Sign a milestone, fund the vault, claim your payout. All on devnet, with test money.",
-      button: "Try the demo on devnet",
+      body: "Sign a milestone, fund the vault, claim your payout. Test money only, no wallet needed.",
+      button: "Try the demo",
     },
   },
 

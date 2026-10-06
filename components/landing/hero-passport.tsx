@@ -23,7 +23,7 @@ export function HeroPassport() {
           owner={copy.institutions.owner.name}
           modality={copy.asset.modality}
           area={copy.asset.area}
-          attestationCount={3}
+          attestationCount={2}
         />
       </motion.div>
       {SEALS.map((s) => (

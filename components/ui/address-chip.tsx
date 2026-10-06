@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { copy as text } from "@/lib/copy";
 import { useCopy } from "@/lib/hooks/use-copy";
 import { ellipsify, getExplorerUrl } from "@/lib/solana/explorer";
+import { SIMULATED } from "@/lib/data/source";
 
 type AddressChipProps = {
   /** Base58 address or transaction signature. */
@@ -54,15 +55,18 @@ export function AddressChip({
           <Copy className="size-3.5" aria-hidden="true" />
         )}
       </button>
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={iconButton}
-        aria-label={text.chips.viewOnExplorer}
-      >
-        <ExternalLink className="size-3.5" aria-hidden="true" />
-      </a>
+      {/* Simulated addresses don't exist on devnet, so there is nothing to open. */}
+      {!SIMULATED && (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={iconButton}
+          aria-label={text.chips.viewOnExplorer}
+        >
+          <ExternalLink className="size-3.5" aria-hidden="true" />
+        </a>
+      )}
       <span className="sr-only" role="status">
         {copied ? text.chips.copied : ""}
       </span>

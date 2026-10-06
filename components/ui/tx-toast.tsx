@@ -4,10 +4,19 @@ import { toast } from "sonner";
 import { ExternalLink } from "lucide-react";
 import { copy } from "@/lib/copy";
 import { getExplorerUrl, ellipsify } from "@/lib/solana/explorer";
+import { SIMULATED } from "@/lib/data/source";
 
 type ToastId = string | number;
 
 function ExplorerLink({ signature, href }: { signature: string; href?: string }) {
+  // Simulated signatures don't exist on devnet: label them instead of linking to a "not found" page.
+  if (SIMULATED) {
+    return (
+      <span className="nums text-xs text-text-muted">
+        {copy.tx.simulated} · {ellipsify(signature, 4)}
+      </span>
+    );
+  }
   return (
     <a
       href={href ?? getExplorerUrl(`/tx/${signature}`)}
